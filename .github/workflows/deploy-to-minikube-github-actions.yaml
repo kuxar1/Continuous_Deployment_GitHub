@@ -31,6 +31,12 @@ jobs:
       run: |
           kubectl get services
           kubectl describe pod nodejs-app
+    - name: sleep for 60 seconds
+      run: sleep 60
+    - name: Check if deploy is runnig again
+      run: | 
+          kubectl get pods
+          kubectl describe pod nodejs-app
     # - name: Test service URLs
     #   run: |
     #       minikube service list
