@@ -20,24 +20,10 @@ jobs:
           echo -n "verifying images:"
           docker images
     - name: Deploy to minikube
-      run:
-        kubectl apply -f k8s-node-app.yaml
-    - name: Verify that deployment is runnig
+      run: kubectl apply -f k8s-node-app.yaml
+    - name: sleep for 30 seconds
+      run: sleep 30
+    - name: Test service URLs
       run: |
-          kubectl get deployments
-          kubectl get pods
-          docker images
-    - name: Verify that service is runnig
-      run: |
-          kubectl get services
-          kubectl describe pod nodejs-app
-    - name: sleep for 60 seconds
-      run: sleep 60
-    - name: Check if deploy is runnig again
-      run: | 
-          kubectl get pods
-          kubectl describe pod nodejs-app
-    # - name: Test service URLs
-    #   run: |
-    #       minikube service list
-    #       minikube service nodejs-app --url
+          minikube service list
+          minikube service nodejs-app --url
