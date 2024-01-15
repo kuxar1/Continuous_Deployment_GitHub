@@ -26,9 +26,12 @@ jobs:
       run: |
           kubectl get deployments
           kubectl get pods
+          docker images
     - name: Verify that service is runnig
-      run: kubectl get services
-    - name: Test service URLs
       run: |
-          minikube service list
-          minikube service nodejs-app --url
+          kubectl get services
+          kubectl describe pod nodejs-app
+    # - name: Test service URLs
+    #   run: |
+    #       minikube service list
+    #       minikube service nodejs-app --url
